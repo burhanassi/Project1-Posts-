@@ -1,24 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Switch, Route, Redirect} from 'react-router-dom';
+import Posts from "./containers/Posts/Posts";
+import AddPost from "./containers/AddPost/AddPost";
+import Auth from "./containers/Auth/Auth";
+
+let routes = (
+    <Switch>
+      <Route path={"/posts"} component={Posts}/>
+      <Route path={"/add-post"} component={AddPost}/>
+      <Route path={"/auth"} component={Auth}/>
+      <Redirect to={'/auth'} from={'/'}/>
+    </Switch>
+)
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {routes}
     </div>
   );
 }
