@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import classes from './Post.module.css';
 
 class Post extends Component {
     state = {
@@ -14,13 +14,13 @@ class Post extends Component {
 
     render() {
         return (
-            <div>
+            <div className={classes.Post}>
                 <Checkbox
                     checked={this.state.checked}
                     onChange={this.handleChange}
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                 />
-                <TextareaAutosize aria-label="minimum height" rowsMin={3} placeholder="Minimum 3 rows" defaultValue={this.props.children}/>
+                <p className={classes.P}>{this.props.children}</p>
             </div>
         );
     }
