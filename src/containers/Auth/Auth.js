@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import Navigations from "../../components/Navigations/Navigations";
 import classes from './Auth.module.css';
 
@@ -19,8 +20,9 @@ class Auth extends Component{
             <div>
                 <Navigations/>
                 <div className={classes.FormCardClass}>
-
-                    <h3 className={classes.H}>Login</h3>
+                    <Typography className={classes.H} variant="h3" gutterBottom>
+                        Login
+                    </Typography>
                     <form className={classes.FormClass}>
                         <TextField id="outlined-basic" label="E-mail Address" variant="outlined" />
                         <br/>

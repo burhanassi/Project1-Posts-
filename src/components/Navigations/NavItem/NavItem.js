@@ -4,9 +4,10 @@ import {NavLink} from "react-router-dom";
 
 class NavItem extends Component {
     render() {
+        const {link, children} = this.props;
         return (
             <li className={classes.NavItem}>
-                <NavLink exact activeClassName={classes.active} to={this.props.link} >{this.props.children}</NavLink>
+                <NavLink exact activeClassName={classes.active} to={link} >{children}</NavLink>
             </li>
         );
     }
