@@ -1,0 +1,29 @@
+.MainDiv {
+    width: 70%;
+    padding: 10px;
+    margin-top: 50px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    margin-left: 15%;
+}
+
+.MainDiv .P {
+    width: 50%;
+    height: 25px;
+    box-shadow: #00897b 2px 1px;
+    border: black solid 1px;
+    position: center;
+    margin-left: 25%;
+}
+
+.MainDiv .Posts {
+    width: 80%;
+    display: flex;
+    flex-flow: column;
+    border: black solid 1px;
+    box-shadow: #00897b 2px 1px;
+    margin-left: 10%;
+    margin-top: 15px;
+    padding: 5px;
+}

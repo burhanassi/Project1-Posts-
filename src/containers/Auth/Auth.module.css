@@ -1,0 +1,22 @@
+.FormCardClass {
+    padding: 5px;
+    border: black solid 1px;
+    width: 50%;
+    height: 50%;
+    border-radius: 5px;
+    margin: 90px 25% 0;
+    box-shadow: #00897b 2px 1px;
+}
+
+.FormClass {
+    margin: 40px 10% 0;
+    padding: 3px;
+    flex-flow: column;
+    display: flex;
+    width: 80%;
+    height: 40%;
+}
+
+.FormCardClass .H {
+    border-bottom: black solid 1px;
+}

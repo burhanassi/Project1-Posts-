@@ -1,0 +1,13 @@
+.Post {
+    width: 100%;
+    padding: 5px;
+    margin-top: 3px;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}
+
+.Post .P {
+    width: 80%;
+    box-shadow: #00897b 1px 0.5px;
+}
