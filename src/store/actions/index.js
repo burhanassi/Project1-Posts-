@@ -1,6 +1,9 @@
 export {
-    addPost
-} from './addPost';
-export {
-    initPosts
+    addPost,
+    showPosts
 } from './posts';
+export {
+    auth,
+    logout,
+    authCheckState
+} from './auth';

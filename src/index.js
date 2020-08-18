@@ -4,23 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
-import addPost from './store/reducers/addPost';
-import posts from './store/reducers/posts';
-
-import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
-import thunk from "redux-thunk";
 import {Provider} from "react-redux";
+import store from "./store";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const rootReducer = combineReducers({
-    add: addPost,
-    posts: posts
-});
-
-const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
-));
 
 ReactDOM.render(
 
