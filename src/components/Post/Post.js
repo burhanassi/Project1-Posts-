@@ -8,8 +8,7 @@ class Post extends Component {
     }
 
     handleChange = () => {
-        this.setState({checked: !this.state.checked});
-        console.log(this.state.checked);
+        this.setState(prevState => ({checked: !prevState.checked}));
     }
 
     render() {
