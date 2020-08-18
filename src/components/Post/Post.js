@@ -12,6 +12,7 @@ class Post extends Component {
     }
 
     render() {
+        const {children} = this.props;
         return (
             <div className={classes.Post}>
                 <Checkbox
@@ -19,7 +20,7 @@ class Post extends Component {
                     onChange={this.handleChange}
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                 />
-                <p className={classes.P}>{this.props.children}</p>
+                <p className={classes.P}>{children}</p>
             </div>
         );
     }

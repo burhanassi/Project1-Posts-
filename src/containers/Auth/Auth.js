@@ -21,7 +21,7 @@ class Auth extends Component{
                 <Navigations/>
                 <div className={classes.FormCardClass}>
                     <Typography className={classes.H} variant="h3" gutterBottom>
-                        LogIn
+                        Login
                     </Typography>
                     <form className={classes.FormClass}>
                         <TextField id="outlined-basic" label="E-mail Address" variant="outlined" />
