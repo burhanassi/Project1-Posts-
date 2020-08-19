@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import {Link} from "@material-ui/core";
 import * as actions from '../../store/actions/index';
 import {connect} from "react-redux";
-import Logout from "./Logout/Logout";
 import {Redirect} from "react-router-dom";
 
 // const useStyles = makeStyles((theme) => ({
@@ -74,7 +73,7 @@ class Auth extends Component{
             <div>
                 {this.props.isAuthenticated && <Navigations/>}
                 {errorMessage}
-                {this.props.isAuthenticated ? form : <Redirect to={'/posts'}/>}
+                {!this.props.isAuthenticated ? form : <Redirect to={'/logout'}/>}
             </div>
         );
     };

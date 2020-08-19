@@ -43,7 +43,8 @@ export const showPosts = () => {
                 const posts=[];
                 for (let key in response.data) {
                     posts.push({
-                        ...response.data[key]
+                        ...response.data[key],
+                        id: key
                     });
                 }
                 dispatch(showPostsSuccess(posts));

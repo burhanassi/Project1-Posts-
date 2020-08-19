@@ -16,11 +16,10 @@ class Posts extends Component {
 
     render() {
         const {posts} = this.props;
-        let postsComponent = null;
 
-        for (let key in posts) {
-            postsComponent = <Post key={key}>{posts[key].description}</Post>
-        }
+        let postsComponent = posts.map(post => {
+            return <Post key={post.id}>{post.description}</Post>
+        });
 
         return (
             <div>
