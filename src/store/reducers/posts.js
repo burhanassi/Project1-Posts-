@@ -6,15 +6,17 @@ const initialState = {
     loading: false
 };
 
-const showPosts = (state, action) => {
+const showPosts = (state) => {
     return updateObject(state, {
-        posts: [...state.posts, action.posts],
         loading: true
     });
 };
 
-const showPostsSuccess = (state) => {
-    return updateObject(state, {loading: false});
+const showPostsSuccess = (state, action) => {
+    return updateObject(state, {
+        posts: action.posts,
+        loading: false
+    });
 };
 
 const showPostsFail = (state) => {
@@ -33,12 +35,10 @@ const addPostFail = (state) => {
     return updateObject(state, {loading: true});
 };
 
-
-
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actions.SHOW_POSTS: return showPosts(state, action);
-        case actions.SHOW_POSTS_SUCCESS: return showPostsSuccess(state);
+        case actions.SHOW_POSTS_SUCCESS: return showPostsSuccess(state, action);
         case actions.SHOW_POSTS_FAIL: return showPostsFail(state);
         case actions.ADD_POST: return addPost(state, action);
         case actions.ADD_POST_SUCCESS: return addPostSuccess(state);

@@ -8,16 +8,26 @@ import Navigations from "../../../components/Navigations/Navigations";
 class Logout extends Component {
     buttonClickedHandler = () => {
         this.props.logout();
-        return <Redirect to={'/auth'}/>;
     }
 
     render() {
+        let logoutPage = (<Button onClick={this.buttonClickedHandler} variant="contained">Logout</Button>);
+
+        if(!this.props.isAuth){
+            logoutPage = <Redirect to={'/auth'}/>;
+        }
         return (
             <div>
                 <Navigations/>
-                <Button onClick={this.buttonClickedHandler} variant="contained">Logout</Button>
+                {logoutPage}
             </div>
         );
+    }
+}
+
+const maoStateToProps = state => {
+    return {
+        isAuth: state.authentication.token !== null
     }
 }
 
@@ -27,4 +37,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null,mapDispatchToProps)(Logout);
+export default connect(maoStateToProps,mapDispatchToProps)(Logout);

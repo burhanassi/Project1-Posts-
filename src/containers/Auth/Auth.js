@@ -25,12 +25,8 @@ class Auth extends Component{
         password: null
     }
 
-    emailChangeHandler = (event) => {
-        this.setState({email: event.target.value});
-    }
-
-    passwordChangeHandler = (event) => {
-        this.setState({password: event.target.value});
+    inputFieldChangeHandler = (event) => {
+        this.setState({[event.target.name]: event.target.value});
     }
 
     switchSignupHandler = () => {
@@ -58,9 +54,9 @@ class Auth extends Component{
                     {!this.state.isSignUp ? 'Login' : 'Sign Up'}
                 </Typography>
                 <form className={classes.FormClass}>
-                    <TextField id="outlined-basic" label="E-mail Address" variant="outlined" onChange={(event) => this.emailChangeHandler(event)}/>
+                    <TextField name="email" label="E-mail Address" variant="outlined" onChange={(event) => this.inputFieldChangeHandler(event)}/>
                     <br/>
-                    <TextField id="outlined-basic" label="Password" type={'password'} variant="outlined" onChange={(event) => this.passwordChangeHandler(event)}/>
+                    <TextField name={"password"} label="Password" type={'password'} variant="outlined" onChange={(event) => this.inputFieldChangeHandler(event)}/>
                     <br/>
                     {/*{displayNameInput}*/}
                     {/*<br/>*/}
@@ -78,7 +74,7 @@ class Auth extends Component{
             <div>
                 {this.props.isAuthenticated && <Navigations/>}
                 {errorMessage}
-                {form}
+                {this.props.isAuthenticated ? form : <Redirect to={'/posts'}/>}
             </div>
         );
     };

@@ -6,21 +6,29 @@ import {connect} from "react-redux";
 import * as actions from '../../store/actions/index';
 
 class Posts extends Component {
+    state = {
+        readCount: 0,
+        unreadCount: 0
+    }
     componentDidMount() {
         this.props.onShowPosts();
     }
 
     render() {
-        let posts = this.props.posts.map(post =>
-            <Post key={post.title}>{post.description}</Post>
-        )
+        const {posts} = this.props;
+        let postsComponent = null;
+
+        for (let key in posts) {
+            postsComponent = <Post key={key}>{posts[key].description}</Post>
+        }
+
         return (
             <div>
                 <Navigations/>
                 <div className={classes.MainDiv}>
-                    <p className={classes.P}># read - # unread</p>
+                    <p className={classes.P}>{this.state.readCount} read - {this.state.unreadCount} unread</p>
                     <div className={classes.Posts}>
-                        {posts}
+                        {postsComponent}
                     </div>
                 </div>
             </div>

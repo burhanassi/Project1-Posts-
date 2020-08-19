@@ -6,23 +6,29 @@ import classes from './AddPost.module.css';
 import * as actions from '../../store/actions/index';
 import {connect} from 'react-redux';
 
-let title = '';
-let description = '';
-
 class AddPost extends Component {
 
+    state = {
+        title: null,
+        description: null
+    }
+
     addPostHandler = () => {
-        this.props.onAddPost(title, description);
+        if (this.state.title && this.state.description){
+            this.props.onAddPost(this.state.title, this.state.description);
+        }else {
+            window.alert("Please enter data for the post you trying to add it!");
+        }
     }
 
     titleHandler = (event) => {
         event.preventDefault();
-        title = event.target.value;
+        this.setState({title: event.target.value});
     }
 
     descriptionHandler = (event) => {
         event.preventDefault();
-        description = event.target.value;
+        this.setState({description: event.target.value});
     }
 
     render() {
@@ -30,7 +36,7 @@ class AddPost extends Component {
             <div>
                 <Navigations/>
                 <form className={classes.FormClass}>
-                    <TextField id="standard-secondary" label="Title" color="secondary" onChange={(event) => this.titleHandler(event)}/>
+                    <TextField id="standard-secondary" label="Title" color="secondary" onChange={this.titleHandler}/>
                     <br/>
                     <TextField
                         id="outlined-multiline-static"
@@ -39,7 +45,7 @@ class AddPost extends Component {
                         rows={4}
                         defaultValue=""
                         variant="outlined"
-                        onChange={(event) => this.descriptionHandler(event)}
+                        onChange={this.descriptionHandler}
                     />
                     <br/>
                     <Button onClick={this.addPostHandler} className={classes.Button} variant="contained" color="secondary">
@@ -54,7 +60,7 @@ class AddPost extends Component {
 const mapStateToProps = state => {
     return {
         posts: state.posts.posts,
-        loading: state.loading
+        loading: state.posts.loading
     }
 }
 
