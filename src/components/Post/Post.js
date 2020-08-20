@@ -11,8 +11,7 @@ class Post extends Component {
     }
 
     handleChange = () => {
-        this.setState(prevState => ({checked: !prevState.checked}));
-        this.props.onChange && this.props.onChange(this.state);
+        this.setState(prevState => ({checked: !prevState.checked}), this.props.onChange && this.props.onChange(this.state));
     }
 
     render() {

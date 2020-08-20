@@ -6,23 +6,19 @@ import Navigations from "../../components/Navigations/Navigations";
 import classes from './AddPost.module.css';
 import * as actions from '../../store/actions/index';
 import {connect} from 'react-redux';
-import AlertTitle from "@material-ui/lab/AlertTitle";
-import Spinner from "../../components/UI/Spinner";
-let alert = null;
 
 class AddPost extends Component {
 
     state = {
         title: null,
-        description: null
+        description: null,
+        alert: false
     }
 
     addPostHandler = () => {
         if (this.state.title && this.state.description){
-            alert = <Alert severity="success"><AlertTitle>Success</AlertTitle>Your post added successfully!</Alert>
             this.props.onAddPost(this.state.title, this.state.description);
-        }else {
-            alert = <Alert severity="error"><AlertTitle>Warning</AlertTitle>Please enter data for the post you trying to add it!</Alert>
+            this.setState({alert: true});
         }
     }
 
@@ -37,6 +33,13 @@ class AddPost extends Component {
     }
 
     render() {
+        const {isAuthenticated} = this.props;
+        let alert = <Alert severity="warning">Please enter data for the post you trying to add it!</Alert>
+
+        if(this.state.alert){
+            alert = <Alert severity="success">Your post added successfully!</Alert>
+        }
+
         let form = (
             <div className={classes.MainDiv}>
                 {alert}
@@ -60,13 +63,9 @@ class AddPost extends Component {
             </div>
         )
 
-        if(this.props.loading){
-            form = <Spinner/>
-        }
-
         return (
             <div>
-                <Navigations isAuth={this.props.isAuthenticated}/>
+                <Navigations isAuth={isAuthenticated}/>
                 {form}
             </div>
         );
@@ -76,7 +75,6 @@ class AddPost extends Component {
 const mapStateToProps = state => {
     return {
         posts: state.postss.posts,
-        loading: state.postss.loading,
         isAuthenticated: state.authentication.token !== null
     }
 }
