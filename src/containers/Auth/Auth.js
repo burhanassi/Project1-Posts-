@@ -73,7 +73,7 @@ class Auth extends Component{
             <div>
                 {this.props.isAuthenticated && <Navigations/>}
                 {errorMessage}
-                {!this.props.isAuthenticated ? form : <Redirect to={'/logout'}/>}
+                {!this.props.isAuthenticated ? form : <Redirect to={'/posts'}/>}
             </div>
         );
     };

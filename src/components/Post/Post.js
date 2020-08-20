@@ -3,12 +3,16 @@ import Checkbox from '@material-ui/core/Checkbox';
 import classes from './Post.module.css';
 
 class Post extends Component {
-    state = {
-        checked: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            checked: false,
+        };
     }
 
     handleChange = () => {
         this.setState(prevState => ({checked: !prevState.checked}));
+        this.props.onChange && this.props.onChange(this.state);
     }
 
     render() {

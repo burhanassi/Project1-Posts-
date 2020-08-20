@@ -24,7 +24,8 @@ export const addPostSuccess = (id, post) => {
     return {
         type: actions.ADD_POST_SUCCESS,
         post: post,
-        id: id
+        id: id,
+        error: null
     };
 };
 

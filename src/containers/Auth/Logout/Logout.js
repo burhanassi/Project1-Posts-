@@ -19,7 +19,10 @@ class Logout extends Component {
         return (
             <div>
                 <Navigations/>
-                {logoutPage}
+                <div style={{margin: 90}}>
+
+                    {logoutPage}
+                </div>
             </div>
         );
     }

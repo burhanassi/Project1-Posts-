@@ -18,8 +18,9 @@ class App extends Component{
     render() {
         let routes = (
             <Switch>
+                <Route path={'/posts'} component={Posts}/>
                 <Route path={"/auth"} component={Auth}/>
-                <Redirect to={'/auth'} from={'/'}/>
+                <Redirect to={'/posts'} from={'/'}/>
             </Switch>
         )
 

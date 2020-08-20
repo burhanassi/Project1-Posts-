@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import NavItem from "./NavItem/NavItem";
 import classes from './Navigation.module.css';
-import {connect} from "react-redux";
 
 class Navigations extends Component {
     render() {
@@ -15,10 +14,4 @@ class Navigations extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        isAuth: state.authentication.token !== null
-    }
-}
-
-export default connect(mapStateToProps)(Navigations);
+export default (Navigations);
