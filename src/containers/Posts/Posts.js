@@ -2,18 +2,32 @@ import React, {Component} from 'react';
 import Post from "../../components/Post/Post";
 import Navigations from "../../components/Navigations/Navigations";
 import classes from './Posts.module.css'
+import {connect} from "react-redux";
+import * as actions from '../../store/actions/index';
 
 class Posts extends Component {
+    state = {
+        readCount: 0,
+        unreadCount: 0
+    }
+    componentDidMount() {
+        this.props.onShowPosts();
+    }
+
     render() {
+        const {posts} = this.props;
+
+        let postsComponent = posts.map(post => {
+            return <Post key={post.id}>{post.description}</Post>
+        });
+
         return (
             <div>
                 <Navigations/>
                 <div className={classes.MainDiv}>
-                    <p className={classes.P}># read - # unread</p>
+                    <p className={classes.P}>{this.state.readCount} read - {this.state.unreadCount} unread</p>
                     <div className={classes.Posts}>
-                        <Post>Post one</Post>
-                        <Post>Post Two</Post>
-                        <Post>Post Three</Post>
+                        {postsComponent}
                     </div>
                 </div>
             </div>
@@ -21,4 +35,17 @@ class Posts extends Component {
     }
 }
 
-export default Posts;
+const mapStateToProps = state => {
+    return{
+        posts: state.posts.posts,
+        loading: state.posts.loading
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onShowPosts: () => dispatch(actions.showPosts())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Posts);
