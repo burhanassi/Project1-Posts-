@@ -8,10 +8,10 @@ class Navigations extends Component {
             <div className={classes.Navigation}>
                 <NavItem link={"/posts"} >Posts</NavItem>
                 <NavItem link={"/add-post"} >Add Post</NavItem>
-                <NavItem link={"/auth"}>Display Name</NavItem>
+                {this.props.isAuth ? <NavItem link={"/auth"}>Display Name</NavItem> : <NavItem link={"/logout"}>Display Name</NavItem>}
             </div>
         );
     }
 }
 
-export default Navigations;
+export default (Navigations);
