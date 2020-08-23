@@ -6,11 +6,11 @@ import {connect} from "react-redux";
 import * as actions from '../../store/actions/index';
 import Spinner from "../../components/UI/Spinner";
 import Button from "@material-ui/core/Button";
+import {Link} from "react-router-dom";
 
 class Posts extends Component {
     state = {
-        readCount: 0,
-        unreadCount: this.props.posts.length
+        readCount: 0
     }
     componentDidMount() {
         this.props.onShowPosts();
@@ -18,19 +18,15 @@ class Posts extends Component {
 
     addRead = () => {
         this.setState({readCount: this.state.readCount + 1});
-        if(this.state.unreadCount !== 0){
-            this.setState({unreadCount: this.state.unreadCount - 1});
-        }
     }
 
     addUnread = () => {
-        this.setState({unreadCount: this.state.unreadCount + 1});
         if(this.state.readCount !== 0){
             this.setState({readCount: this.state.readCount - 1});
         }
     }
 
-    handler = value => {
+    readUnreadHandler = value => {
         if(!value.checked){
             this.addRead();
         } else {
@@ -41,13 +37,14 @@ class Posts extends Component {
     render() {
         const {posts, loading} = this.props;
 
+
         let postsComponent = posts.map(post => {
-            return <Post onChange={this.handler} key={post.id} >{post.description}</Post>
+            return <Post onChange={this.readUnreadHandler} key={post.id} >{post.description}</Post>
         });
 
         let postsDiv = (
             <div className={classes.MainDiv}>
-                <p className={classes.P}>{this.state.readCount} read - {this.state.unreadCount} unread</p>
+                <p className={classes.P}>{this.state.readCount} read - {posts.length-this.state.readCount} unread</p>
                 <div className={classes.Posts}>
                     {postsComponent}
                 </div>
@@ -60,7 +57,7 @@ class Posts extends Component {
 
         return (
             <div>
-                {this.props.isAuthenticated ? <Navigations/> : <Button href={"/auth"} style={{margin: 20}} color={"default"} variant={"outlined"}>Go to Login page to add some posts</Button>}
+                {this.props.isAuthenticated ? <Navigations/> : <Button style={{margin: 20}} color={"primary"} variant={"outlined"}><Link to={'/auth'} style={{textDecoration: 'none'}}>Go to Login page to add some posts</Link></Button>}
                 {postsDiv}
             </div>
         );

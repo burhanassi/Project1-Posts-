@@ -9,11 +9,11 @@
 }
 
 .FormClass {
-    margin: 40px 10% 0;
+    margin: auto;
     padding: 3px;
     flex-flow: column;
     display: flex;
-    width: 80%;
+    width: 70%;
     height: 40%;
 }
 
@@ -31,6 +31,6 @@
     cursor: pointer;
 }
 
-.FormCardClass .Footer .active {
-    color: #00897b;
+.FormClass .Input {
+    margin-bottom: 10px;
 }

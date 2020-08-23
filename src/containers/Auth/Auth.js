@@ -8,20 +8,14 @@ import {Link} from "@material-ui/core";
 import * as actions from '../../store/actions/index';
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
-
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         '& > *': {
-//             margin: theme.spacing(1),
-//         },
-//     },
-// }));
+import Alert from "@material-ui/lab/Alert";
 
 class Auth extends Component{
     state = {
         isSignUp: false,
         email: null,
-        password: null
+        password: null,
+        displayName: null
     }
 
     inputFieldChangeHandler = (event) => {
@@ -29,22 +23,27 @@ class Auth extends Component{
     }
 
     switchSignupHandler = () => {
-        this.setState({isSignUp: !this.state.isSignUp});
+        this.setState(prevState => ({isSignUp: !prevState.isSignUp}));
     }
 
     submitHandler = (event) => {
         event.preventDefault();
-        this.props.onAuth(this.state.email, this.state.password, this.state.isSignUp)
+        this.props.onAuth(this.state.email, this.state.password, this.state.isSignUp, this.state.displayName)
     }
 
     render() {
-        // const displayNameInput = this.state.isSignUp ? <TextField id={'displayName'} label={"Your Name"} variant={'outlined'}/> : null;
+        const displayNameInput = this.state.isSignUp ? <TextField className={classes.Input} name={"displayName"} label={"Your Name"} variant={'outlined'}/> : null;
         let errorMessage = null;
+        let color = "secondary";
 
         if(this.props.error) {
             errorMessage = (
-                <p>{this.props.error.message}</p>
+                <Alert severity="error" className={classes.Input}>{this.props.error.message}</Alert>
             );
+        }
+
+        if(this.state.isSignUp){
+            color = "primary";
         }
 
         let form = (
@@ -53,13 +52,11 @@ class Auth extends Component{
                     {!this.state.isSignUp ? 'Login' : 'Sign Up'}
                 </Typography>
                 <form className={classes.FormClass}>
-                    <TextField name="email" label="E-mail Address" variant="outlined" onChange={(event) => this.inputFieldChangeHandler(event)}/>
-                    <br/>
-                    <TextField name={"password"} label="Password" type={'password'} variant="outlined" onChange={(event) => this.inputFieldChangeHandler(event)}/>
-                    <br/>
-                    {/*{displayNameInput}*/}
-                    {/*<br/>*/}
-                    <Button variant="contained" color={"secondary"} onClick={this.submitHandler}>{this.state.isSignUp ? 'sign up' : 'LogIn'}</Button>
+                    {errorMessage}
+                    <TextField className={classes.Input} name="email" label="E-mail Address" variant="outlined" onChange={(event) => this.inputFieldChangeHandler(event)}/>
+                    <TextField className={classes.Input} name={"password"} label="Password" type={'password'} variant="outlined" onChange={(event) => this.inputFieldChangeHandler(event)}/>
+                    {displayNameInput}
+                    <Button variant="contained" color={color} onClick={this.submitHandler}>{this.state.isSignUp ? 'sign up' : 'LogIn'}</Button>
                 </form>
                 <Typography className={classes.Footer}>
                     <Link onClick={this.switchSignupHandler}>
@@ -72,7 +69,6 @@ class Auth extends Component{
         return (
             <div>
                 {this.props.isAuthenticated && <Navigations/>}
-                {errorMessage}
                 {!this.props.isAuthenticated ? form : <Redirect to={'/posts'}/>}
             </div>
         );
@@ -89,7 +85,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
+        onAuth: (email, password, isSignup, displayName) => dispatch(actions.auth(email, password, isSignup, displayName))
     }
 }
 

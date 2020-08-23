@@ -37,16 +37,15 @@ class AddPost extends Component {
         let alert = <Alert severity="warning">Please enter data for the post you trying to add it!</Alert>
 
         if(this.state.alert){
-            alert = <Alert severity="success">Your post added successfully!</Alert>
+            alert = <Alert className={classes.Input} severity="success">Your post added successfully!</Alert>
         }
 
         let form = (
             <div className={classes.MainDiv}>
-                {alert}
                 <form className={classes.FormClass}>
-                    <TextField id="standard-secondary" label="Title" color="secondary" onChange={this.titleHandler}/>
-                    <br/>
-                    <TextField
+                    {alert}
+                    <TextField className={classes.Input} id="standard-secondary" label="Title" color="secondary" onChange={this.titleHandler}/>
+                    <TextField className={classes.Input}
                         id="outlined-multiline-static"
                         label="description"
                         multiline
@@ -55,7 +54,6 @@ class AddPost extends Component {
                         variant="outlined"
                         onChange={this.descriptionHandler}
                     />
-                    <br/>
                     <Button onClick={this.addPostHandler} className={classes.Button} variant="contained" color="secondary">
                         Submit
                     </Button>
