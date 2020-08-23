@@ -7,11 +7,12 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId, displayName) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         idToken: token,
-        userId: userId
+        userId: userId,
+        displayName: displayName
     };
 };
 
@@ -41,13 +42,14 @@ export const checkAuthTimeout = (expirationTime) => {
 };
 
 
-export const auth = (email, password, isSignup) =>{
+export const auth = (email, password, isSignup, displayName) =>{
     return dispatch => {
         dispatch(authStart());
         const authData = {
             email: email,
             password: password,
-            returnSecureToken: true
+            returnSecureToken: true,
+            displayName: displayName
         };
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAcnh4Z0vamj86yF7UhwKMrR9Qs7pkPvuY';
         if(!isSignup){
@@ -59,7 +61,8 @@ export const auth = (email, password, isSignup) =>{
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('expirationDate', expirationDate);
                 localStorage.setItem('userId', response.data.localId);
-                dispatch(authSuccess(response.data.idToken, response.data.localId));
+                localStorage.setItem('displayName', response.data.displayName);
+                dispatch(authSuccess(response.data.idToken, response.data.localId, response.data.displayName));
                 dispatch(checkAuthTimeout(response.data.expiresIn));
             })
             .catch(err => {
